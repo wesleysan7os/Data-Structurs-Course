@@ -57,7 +57,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	private BSTNode<T> searchRecursive(BSTNode<T> node, T element) {
 		if (node.isEmpty()) {
-			return NIL;
+			return node;
 
 		} else if (node.getData().compareTo(element) == 0) {
 			return node;
@@ -208,7 +208,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		}
 	}
 
-	private void removeRecursive(BSTNode<T> node, T element) {
+	protected void removeRecursive(BSTNode<T> node, T element) {
 		if (node.isLeaf()) {
 			removeLeaf(node);
 			

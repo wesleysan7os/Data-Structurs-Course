@@ -23,8 +23,8 @@ public class SplayTreeImpl<T extends Comparable<T>> extends BSTImpl<T>
 	@Override
 	public void insert(T element) {
 		if (element != null) {
-			if (super.isEmpty()) {
-				super.setRelationshipAndDataOfNode(root, NIL, element);
+			if (isEmpty()) {
+				setRelationshipAndDataOfNode(root, NIL, element);
 
 			} else {
 				insertRecursive(root, element);
@@ -48,9 +48,9 @@ public class SplayTreeImpl<T extends Comparable<T>> extends BSTImpl<T>
 	@Override
 	public void remove(T element) {
 		BSTNode<T> node = super.search(element);
-		splay((BSTNode<T>) node.getParent());
+		removeRecursive(node, element);
 		
-		super.remove(element);	
+		splay((BSTNode<T>) node.getParent());
 	}
 	
 	private void splay(BSTNode<T> node) {
