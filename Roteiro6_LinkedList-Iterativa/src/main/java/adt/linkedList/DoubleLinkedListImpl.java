@@ -9,6 +9,7 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements 
 		super();
 		nilNode = new DoubleLinkedListNode<>();
 		last = new DoubleLinkedListNode<>();
+		last.setNext(nilNode);
 	}
 
 	@Override
@@ -16,14 +17,32 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements 
 		if (element != null) {
 			if (isEmpty()) {
 				insertFirst(element);
-				
+
 			} else {
 				DoubleLinkedListNode<T> nodeToBeInserted = new DoubleLinkedListNode<T>(element, nilNode, last);
 				last.setNext(nodeToBeInserted);
 				last = nodeToBeInserted;
 				size++;
 			}
+		}
+	}
 
+	@Override
+	public void insertFirst(T element) {
+		if (element != null) {
+			if (isEmpty()) {
+				head = last;
+				head.setData(element);
+
+			} else {
+				DoubleLinkedListNode<T> nodeToBeInserted = new DoubleLinkedListNode<T>(element,
+						(DoubleLinkedListNode<T>) head, nilNode);
+				((DoubleLinkedListNode<T>) head).setPrevious(nodeToBeInserted);
+
+				setHead(nodeToBeInserted);
+			}
+
+			size++;
 		}
 	}
 
@@ -36,7 +55,7 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements 
 			} else if (last.getData().equals(element)) {
 				removeLast();
 
-			} else {
+			} else if (size() > 1) {
 				SingleLinkedListNode<T> aux = head.getNext();
 
 				while (!aux.isNIL() && !aux.getData().equals(element)) {
@@ -51,25 +70,6 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements 
 					size--;
 				}
 			}
-		}
-	}
-
-	@Override
-	public void insertFirst(T element) {
-		if (element != null) {
-			if (isEmpty()) {
-				head = last;
-				head.setData(element);
-				
-			} else {
-				DoubleLinkedListNode<T> nodeToBeInserted = new DoubleLinkedListNode<T>(element,
-						(DoubleLinkedListNode<T>) head, nilNode);
-				((DoubleLinkedListNode<T>) head).setPrevious(nodeToBeInserted);
-				
-				setHead(nodeToBeInserted);
-			}
-			
-			size++;
 		}
 	}
 

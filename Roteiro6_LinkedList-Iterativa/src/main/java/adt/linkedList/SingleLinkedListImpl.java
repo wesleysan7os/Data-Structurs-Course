@@ -3,7 +3,7 @@ package adt.linkedList;
 public class SingleLinkedListImpl<T> implements LinkedList<T> {
 
 	protected SingleLinkedListNode<T> head;
-	protected SingleLinkedListNode<T> nilNode;
+	private SingleLinkedListNode<T> nilNode;
 	protected int size;
 
 	public SingleLinkedListImpl() {
