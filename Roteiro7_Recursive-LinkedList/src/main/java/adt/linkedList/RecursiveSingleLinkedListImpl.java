@@ -1,0 +1,114 @@
+package adt.linkedList;
+
+public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
+
+	protected T data;
+	protected RecursiveSingleLinkedListImpl<T> next;
+
+	public RecursiveSingleLinkedListImpl() {
+
+	}
+
+	public RecursiveSingleLinkedListImpl(T data,
+			RecursiveSingleLinkedListImpl<T> next) {
+		this.data = data;
+		this.next = next;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return (data == null);
+	}
+
+	@Override
+	public int size() {
+		int size;
+		
+		if (isEmpty()) {
+			size = 0;
+			
+		} else {
+			size = next.size() + 1;
+		}
+		
+		return size;
+	}
+
+	@Override
+	public T search(T element) {
+		T elementToBeSearched;
+		
+		if (isEmpty()) {
+			elementToBeSearched = null;
+
+		} else if (data.equals(element)){
+			elementToBeSearched = element;
+			
+		} else {
+			elementToBeSearched = next.search(element);
+		}
+			
+		return elementToBeSearched;
+	}
+
+	@Override
+	public void insert(T element) {
+		if (element != null) {
+			if (isEmpty()) {
+				data = element;
+				next = new RecursiveSingleLinkedListImpl<>();
+				
+			} else {
+				next.insert(element);
+			}
+		}
+	}
+
+	@Override
+	public void remove(T element) {
+		if (!isEmpty()) {
+			if (data.equals(element)) {
+				data = next.getData();
+				next = next.getNext();
+			
+			} else {
+				next.remove(element);
+			}
+		}
+	}
+
+	@Override
+	public T[] toArray() {
+		T[] array= (T[]) new Object[size()];
+		toArrayRecursive(array, this, 0);
+		
+		return array;
+	}
+	
+	private void toArrayRecursive(T[] array, RecursiveSingleLinkedListImpl<T> node, int index) {
+		if (!node.isEmpty()) {
+			array[index] = node.getData();
+			index++;
+			
+			node.toArrayRecursive(array, node.getNext(), index);
+		}
+	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
+	}
+
+	public RecursiveSingleLinkedListImpl<T> getNext() {
+		return next;
+	}
+
+	public void setNext(RecursiveSingleLinkedListImpl<T> next) {
+		this.next = next;
+	}
+
+
+}
