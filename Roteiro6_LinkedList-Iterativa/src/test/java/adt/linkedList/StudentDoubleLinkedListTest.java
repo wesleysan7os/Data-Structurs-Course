@@ -90,6 +90,7 @@ public class StudentDoubleLinkedListTest extends StudentLinkedListTest {
 		lista1.remove(1);
 		Assert.assertEquals(1, lista1.size());
 		lista3.remove(5);
+		lista1.remove(10);
 
 	}
 

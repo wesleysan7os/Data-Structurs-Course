@@ -10,6 +10,7 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements 
 		nilNode = new DoubleLinkedListNode<>();
 		last = new DoubleLinkedListNode<>();
 		last.setNext(nilNode);
+		head = last;
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements 
 						(DoubleLinkedListNode<T>) head, nilNode);
 				((DoubleLinkedListNode<T>) head).setPrevious(nodeToBeInserted);
 
-				setHead(nodeToBeInserted);
+				head = nodeToBeInserted;
 			}
 
 			size++;
@@ -62,7 +63,7 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements 
 					aux = aux.getNext();
 				}
 
-				if (aux.getData().equals(element)) {
+				if (!aux.isNIL()) {
 					((DoubleLinkedListNode<T>) aux).getPrevious().setNext(aux.getNext());
 					((DoubleLinkedListNode<T>) aux.getNext())
 							.setPrevious(((DoubleLinkedListNode<T>) aux).getPrevious());
@@ -75,16 +76,35 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements 
 
 	@Override
 	public void removeFirst() {
-		head = head.getNext();
-		((DoubleLinkedListNode<T>) head).setPrevious(nilNode);
-		size--;
+		if (!isEmpty()) {
+			if (hasJustOneNode()) {
+				head.setData(null);
+				
+			} else {
+				head = head.getNext();
+				((DoubleLinkedListNode<T>) head).setPrevious(nilNode);
+			}
+			
+			size--;
+		}
 	}
 
 	@Override
 	public void removeLast() {
-		last = last.getPrevious();
-		last.setNext(nilNode);
-		size--;
+		if (!isEmpty()) {
+			if (hasJustOneNode()) {
+				head.setData(null);
+				
+			} else {
+				last = last.getPrevious();
+				last.setNext(nilNode);
+				size--;
+			}
+		}
+	}
+	
+	private boolean hasJustOneNode() {
+		return (size == 1);
 	}
 
 	public DoubleLinkedListNode<T> getLast() {
