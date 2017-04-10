@@ -11,6 +11,21 @@ public class QueueDoubleLinkedListImpl<T> implements Queue<T> {
 		this.size = size;
 		this.list = new DoubleLinkedListImpl<T>();
 	}
+	
+	@Override
+	public T head() {
+		return list.getHead().getData();
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return list.isEmpty();
+	}
+
+	@Override
+	public boolean isFull() {
+		return (list.size() == size);
+	}
 
 	@Override
 	public void enqueue(T element) throws QueueOverflowException {
@@ -36,20 +51,4 @@ public class QueueDoubleLinkedListImpl<T> implements Queue<T> {
 			return deletedElement;
 		}
 	}
-
-	@Override
-	public T head() {
-		return list.getHead().getData();
-	}
-
-	@Override
-	public boolean isEmpty() {
-		return list.isEmpty();
-	}
-
-	@Override
-	public boolean isFull() {
-		return (list.size() == size);
-	}
-
 }
