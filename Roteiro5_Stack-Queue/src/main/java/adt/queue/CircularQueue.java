@@ -42,7 +42,7 @@ public class CircularQueue<T> implements Queue<T> {
 			head = (head + 1) % array.length;
 			elements--;
 			
-			if (elements == 0) {
+			if (isEmpty()) {
 				tail = head = -1;
 			}
 			

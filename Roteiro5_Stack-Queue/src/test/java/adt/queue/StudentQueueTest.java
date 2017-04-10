@@ -32,9 +32,9 @@ public class StudentQueueTest {
 
 	private void getImplementations() {
 		// TODO O aluno deve ajustar aqui para instanciar sua implementação
-		queue1 = new CircularQueue<>(3);
-		queue2 = new CircularQueue<>(3);
-		queue3 = new CircularQueue<>(0);
+		queue1 = new QueueImpl<>(3);
+		queue2 = new QueueImpl<>(3);
+		queue3 = new QueueImpl<>(0);
 	}
 
 	// MÉTODOS DE TESTE
@@ -58,7 +58,12 @@ public class StudentQueueTest {
 	public void testEnqueue() {
 		try {
 			queue2.enqueue(new Integer(5));
+			queue2.dequeue();
+			queue2.enqueue(new Integer(20));
 		} catch (QueueOverflowException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (QueueUnderflowException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

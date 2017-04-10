@@ -59,8 +59,8 @@ public class QueueImpl<T> implements Queue<T> {
 
 		} else {
 			T deletedElement = array[OLDEST_ELEMENT];
-			tail--;
 			shiftLeft();
+			tail--;
 
 			return deletedElement;
 		}
