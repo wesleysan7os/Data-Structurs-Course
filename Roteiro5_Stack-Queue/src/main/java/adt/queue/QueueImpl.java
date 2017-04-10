@@ -34,12 +34,6 @@ public class QueueImpl<T> implements Queue<T> {
 		return (tail == arraySize);
 	}
 
-	private void shiftLeft() {
-		for (int i = 0; i < tail; i++) {
-			array[i] = array[i + 1];
-		}
-	}
-
 	@Override
 	public void enqueue(T element) throws QueueOverflowException {
 		if (element != null) {
@@ -59,11 +53,16 @@ public class QueueImpl<T> implements Queue<T> {
 
 		} else {
 			T deletedElement = array[OLDEST_ELEMENT];
-			tail--;
 			shiftLeft();
+			tail--;
 
 			return deletedElement;
 		}
 	}
-
+	
+	private void shiftLeft() {
+		for (int i = 0; i < tail; i++) {
+			array[i] = array[i + 1];
+		}
+	}
 }
